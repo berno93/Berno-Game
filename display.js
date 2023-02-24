@@ -40,6 +40,6 @@ export class Display{
   updateDisplay() {
     this.levelH3.innerText = this.level
     this.pointsH3.innerText = this.points
-    this.sequenceH3.innerText = this.sequence
+    this.sequenceH3.innerText = this.sequenceLength
   }
 }

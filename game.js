@@ -16,24 +16,24 @@ export class Game {
     return this.computerSequence
   }
 
-  createUserSequence(){
-    this.circle = document.getElementById('circle');
-    circle.addEventListener('click', (event) => {
-      let indexUser = Array.from(circle.children).indexOf(event.target);
-      this.userSequence.push(indexUser);
-    });
-  }
+  // createUserSequence(){
+  //   this.circle = document.getElementById('circle');
+  //   circle.addEventListener('click', (event) => {
+  //     let indexUser = Array.from(circle.children).indexOf(event.target);
+  //     this.userSequence.push(indexUser);
+  //   });
+  // }
 
-  compareLastUserSequenceElement(){
-    for (let i=0; i==indexComputer; i++){
-      return true
-    }
-    return false
-  }
+  // compareLastUserSequenceElement(){
+  //   for (let i=0; i==indexComputer; i++){
+  //     return true
+  //   }
+  //   return false
+  // }
 
-  isLastUserSequenceElement(){
+  // isLastUserSequenceElement(){
     
-  }
+  // }
 
   comparerTableaux() {
     if (this.computerSequence.length !== this.userSequence.length) {
