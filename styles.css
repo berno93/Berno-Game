@@ -1,0 +1,51 @@
+
+    
+
+h1,h2,h3,h4,h5{
+    text-align: center;
+    font-family: 'Tourney', cursive;
+}
+
+
+#circle {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    margin: 0px auto;
+}
+
+#circle div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#circle div:nth-child(1) {
+    clip-path: polygon(0% 0%, 100% 0%, 50% 50%);
+    background-color: red;
+}
+
+#circle div:nth-child(2) {
+    clip-path: polygon(100% 0%, 100% 100%, 50% 50%);
+    background-color: yellow;
+}
+
+#circle div:nth-child(3) {
+    clip-path: polygon(50% 50%, 100% 100%, 0% 100%);
+    background-color: green;
+}
+
+#circle div:nth-child(4) {
+    clip-path: polygon(0% 0%, 50% 50%, 0% 100%);
+    background-color: blue;
+}
+
+.btns, .btn-game{
+    text-align: center;
+    margin-top: 50px;
+}
+
