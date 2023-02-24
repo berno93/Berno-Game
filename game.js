@@ -1,7 +1,7 @@
 export class Game {
   constructor() {
     this.points = 0
-    this.level = 4
+    this.level = 1
     this.sequenceLength = this.level
     this.computerSequence = []
     this.userSequence = []
@@ -50,7 +50,16 @@ export class Game {
 
   gameReset(){
     this.points=0
-    this.level=4
+    this.level=1
+    this.sequenceLength = this.level
+    this.userSequence.splice(0, this.userSequence.length);
+  }
+
+  turnNext(){
+    this.points+=2
+    this.level++
+    this.sequenceLength = this.level
+    this.userSequence.splice(0, this.userSequence.length);
   }
   
 }

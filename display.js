@@ -13,6 +13,10 @@ export class Display{
     this.sequenceH3 = document.getElementById("sequence")
     this.colorBtns = document.querySelectorAll("#circle > div")
     console.log("colorBtn", this.colorBtns)
+    this.resetButton = document.getElementById("reset")
+    this.resetButton.addEventListener("click", () => {
+      this.reset()
+    })
     this.startButton = document.getElementById("start")
     this.startButton.addEventListener("click", () => {
       this.playSequence()
@@ -22,13 +26,18 @@ export class Display{
       colorBtn.addEventListener('click',()=>{
         const isLastElementGood = this.game.addToUserSequenceAndCompare(index)
         if(!isLastElementGood){
-          this.reset()
+            this.reset()
+        }else{
+            this.turnAfter()
         }
+
+        
       })
     })
   }
 
   playSequence() {
+    this.turnH3.innerText = "Au tour de l'ordianteur"
     let computerSequenceIndex = 0
     const intervalId = setInterval(() => {
       const colorBtnIndex = this.game.computerSequence[computerSequenceIndex]
@@ -38,9 +47,9 @@ export class Display{
         clearInterval(intervalId) // arrêter l'interval quand l'opacité atteint 1
         // Faire revenir l'opacité à sa valeur initiale après une pause de 1 seconde
         this.game.isUserTurn=true
+        this.turnH3.innerText = "Au tour du joueur"
       }
     }, 1000) // appliquer la transition toutes les 10 millisecondes
-    this.turnH3.innerText = "Au tour de l'ordianteur"
   }
 
   turnButtonOn(colorBtnIndex){
@@ -48,6 +57,7 @@ export class Display{
       setTimeout(() => {
         this.colorBtns[colorBtnIndex].style.opacity = 1
       }, 800)
+    //   this.turnH3.innerText = "Au tour du joueur"
   }
 
   updateDisplay() {
@@ -59,5 +69,12 @@ export class Display{
   reset(){
     this.game.gameReset()
     this.updateDisplay()
+    this.playSequence()
+  }
+
+  turnAfter(){
+    this.game.turnNext()
+    this.updateDisplay()
+    this.playSequence()
   }
 }
