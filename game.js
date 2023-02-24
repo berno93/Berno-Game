@@ -6,33 +6,34 @@ export class Game {
     this.computerSequence = []
     this.userSequence = []
     this.createComputerSequence()
+    this.isUserTurn = false
   }
   
   createComputerSequence() {
     for ( let i=0 ;i < this.sequenceLength ;i++){
-      let indexComputer = Math.round(Math.random() * 3)
+      let indexComputer = Math.floor(Math.random() * 4)
       this.computerSequence.push(indexComputer)
     }
+    console.log('sequence : ', this.computerSequence)
     return this.computerSequence
   }
 
-  createUserSequence(){
-    this.circle = document.getElementById('circle');
-    circle.addEventListener('click', (event) => {
-      let indexUser = Array.from(circle.children).indexOf(event.target);
-      this.userSequence.push(indexUser);
-    });
-  }
-
-  compareLastUserSequenceElement(){
-    for (let i=0; i==indexComputer; i++){
-      return true
+  addToUserSequenceAndCompare(buttonIndex){
+    if(this.isUserTurn){
+      this.userSequence.push(buttonIndex)
+      return this.compareLastUserSequenceElement()
     }
     return false
   }
 
-  isLastUserSequenceElement(){
-    
+  compareLastUserSequenceElement(){
+    const lastUserElementIndex = this.userSequence.length-1
+    this.isUserTurn=!this.isNowComputerTurn()
+    return this.userSequence[lastUserElementIndex]===this.computerSequence[lastUserElementIndex]
+  }
+
+  isNowComputerTurn(){
+    return this.userSequence.length===this.computerSequence.length
   }
 
   comparerTableaux() {
@@ -45,6 +46,11 @@ export class Game {
       }
     }
     return true // Les tableaux sont identiques
+  }
+
+  gameReset(){
+    this.points=0
+    this.level=4
   }
   
 }
