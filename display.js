@@ -18,28 +18,46 @@ export class Display{
       this.playSequence()
     })
     this.updateDisplay()
+    this.colorBtns.forEach((colorBtn,index)=>{
+      colorBtn.addEventListener('click',()=>{
+        const isLastElementGood = this.game.addToUserSequenceAndCompare(index)
+        if(!isLastElementGood){
+          this.reset()
+        }
+      })
+    })
   }
 
   playSequence() {
     let computerSequenceIndex = 0
     const intervalId = setInterval(() => {
       const colorBtnIndex = this.game.computerSequence[computerSequenceIndex]
-      this.colorBtns[colorBtnIndex].style.opacity = 0.5
-      setTimeout(() => {
-        this.colorBtns[colorBtnIndex].style.opacity = 1
-      }, 800)
+      this.turnButtonOn(colorBtnIndex)
       computerSequenceIndex++
       if (computerSequenceIndex >= this.game.computerSequence.length) {
         clearInterval(intervalId) // arrêter l'interval quand l'opacité atteint 1
         // Faire revenir l'opacité à sa valeur initiale après une pause de 1 seconde
+        this.game.isUserTurn=true
       }
     }, 1000) // appliquer la transition toutes les 10 millisecondes
     this.turnH3.innerText = "Au tour de l'ordianteur"
   }
 
+  turnButtonOn(colorBtnIndex){
+    this.colorBtns[colorBtnIndex].style.opacity = 0.5
+      setTimeout(() => {
+        this.colorBtns[colorBtnIndex].style.opacity = 1
+      }, 800)
+  }
+
   updateDisplay() {
-    this.levelH3.innerText = this.level
-    this.pointsH3.innerText = this.points
-    this.sequenceH3.innerText = this.sequenceLength
+    this.levelH3.innerText = this.game.level
+    this.pointsH3.innerText = this.game.points
+    this.sequenceH3.innerText = this.game.sequenceLength
+  }
+
+  reset(){
+    this.game.gameReset()
+    this.updateDisplay()
   }
 }
